@@ -18,7 +18,6 @@ Check out the live demo [here](https://jeffamazed.github.io/random-quote-machine
 - **React:** Frontend JavaScript library for building the user interface.
 - **FontAwesome:** For social media icons.
 - **Google Fonts:** For typography.
-- **FreeCodeCamp Test Suite:** For testing and validation.
 
 ## Installation
 
