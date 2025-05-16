@@ -114,20 +114,36 @@ function generateRandQuote(list) {
 
 // React
 
-function Main() {
+function RandomQuoteMachine() {
   // state
   const [randomQuote, setRandomQuote] = React.useState(
     () => generateRandQuote(quoteList)
   );
+  const [isTransitioning, setIsTransitioning] = React.useState(false);
+  const [hasReset, setHasReset] = React.useState(false);
 
   // ref
-  const newQuoteBtnRef = React.useState(null);
+  const newQuoteBtnRef = React.useRef(null);
 
   React.useEffect(() => {
     if (newQuoteBtnRef.current) {
       newQuoteBtnRef.current.focus();
     }
   }, [])
+
+  // click
+  function handleButtonClick() {
+    setHasReset(false);
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setRandomQuote(generateRandQuote(quoteList))
+    }, 750);
+
+    setTimeout(() => {
+      setIsTransitioning(false);
+      setHasReset(true);
+    }, 800);
+  }
 
   return (
     <main 
@@ -141,7 +157,11 @@ function Main() {
         aria-labelledby="text"
       >
         <figure 
-          className="fade-in" 
+          className={
+            isTransitioning ? "fade-out" :
+            hasReset ? "fade-in" :
+            ""
+          }
           key={randomQuote.id}
           aria-live="polite"
         >
@@ -175,7 +195,7 @@ function Main() {
           <button 
             className="new-quote-btn" 
             id="new-quote"
-            onClick={() => setRandomQuote(generateRandQuote(quoteList))}
+            onClick={handleButtonClick}
             style={{ backgroundColor: randomQuote.color}}
             ref={newQuoteBtnRef}
             aria-label="Generate a new random quote"
@@ -204,6 +224,6 @@ ReactDOM.render(<App />, document.getElementById("root"));
 
 function App() {
   return (
-    <Main />
+    <RandomQuoteMachine />
   );
 }
