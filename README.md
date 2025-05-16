@@ -4,7 +4,7 @@ This is a Random Quote Generator built using React. The application generates ra
 
 ## Demo
 
-Check out the live demo [here](https://your-live-demo-link.com).
+Check out the live demo [here](https://jeffamazed.github.io/random-quote-machine/).
 
 ## Features
 
